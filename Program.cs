@@ -14,24 +14,40 @@ c) Hey means “halb” or “half.” The player gets half of the pot. (If ther
 d) Shin (outside of Israel) means “shtel” or “put in.” */
 
 int numberOfPlayers = 0;
-string[] players = new string[numberOfPlayers]; 
+string[] playerNames = new string[numberOfPlayers]; 
 int pot = numberOfPlayers * 5;
 Random random = new Random();
 string[] dreidelSides = {"\u05E0", "\u05D2", "\u05D4", "\u05E9"}; // nun, gimmel, hey, shin
-int dreidelSpinRandom = random.Next(1, 4); // dreidelSides.Count +1); // TODO - 
+int dreidelSpinRandom = random.Next(1, 4); // dreidelSides.Count +1);
 string dreidelSpinResult = dreidelSides[dreidelSpinRandom];
-int playerScore = 0; // TODO - how to get everyone's scores? I guess make a method to CreatePlayer() every time I add a new player?
+int playerScore = 0; // TODO - how to get everyone's scores? 
 
 //TODO - get number and names of players and store in an array
 
 void makePlayer()
 {
     Console.WriteLine("enter the number of players (max 4)");
-    string ?readResult = Console.ReadLine(); // TODO make this its own method so I can loop it
-    Int32.TryParse(readResult, out numberOfPlayers); //todo add null handling
+    string ?readResult = Console.ReadLine(); // TODO make this its own method so I can loop it 
+    // TODO *or*, just make this an int?
+    Int32.TryParse(readResult, out numberOfPlayers);
+    bool isValidInteger = Int32.TryParse(readResult, out numberOfPlayers);
+    if (isValidInteger) 
+        {
+            Console.WriteLine($"You are playing dreidel with {numberOfPlayers-1} friends!");
+        } 
+    else
+        {
+            Console.WriteLine($"You entered {readResult}, please enter a valid number between 1 and 4");
+        }
+
     if (numberOfPlayers > 4) Console.WriteLine("Sorry, you need at least 2 and at most 4 players to play dreidel! Enter a new player value");
     //TODO add try again functionality
 
+    //enumerate the players  
+}
+
+void setPlayerOrder()
+{
     Console.WriteLine("let's do a practice spin to see who goes first!");
     for (int i = 0; i < numberOfPlayers; i++) 
     {   
@@ -44,7 +60,7 @@ void makePlayer()
 
 void gameTurn()
 {
-    foreach (string player in players) {
+    foreach (string player in playerNames) {
     // spin the dreidel
         switch (dreidelSpinResult)
         {
