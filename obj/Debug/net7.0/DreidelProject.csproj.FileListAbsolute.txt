@@ -1,0 +1,14 @@
+C:\Users\isabel.bard\Code Projects\DreidelProject\bin\Debug\net7.0\DreidelProject.exe
+C:\Users\isabel.bard\Code Projects\DreidelProject\bin\Debug\net7.0\DreidelProject.deps.json
+C:\Users\isabel.bard\Code Projects\DreidelProject\bin\Debug\net7.0\DreidelProject.runtimeconfig.json
+C:\Users\isabel.bard\Code Projects\DreidelProject\bin\Debug\net7.0\DreidelProject.dll
+C:\Users\isabel.bard\Code Projects\DreidelProject\bin\Debug\net7.0\DreidelProject.pdb
+C:\Users\isabel.bard\Code Projects\DreidelProject\obj\Debug\net7.0\DreidelProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\isabel.bard\Code Projects\DreidelProject\obj\Debug\net7.0\DreidelProject.AssemblyInfoInputs.cache
+C:\Users\isabel.bard\Code Projects\DreidelProject\obj\Debug\net7.0\DreidelProject.AssemblyInfo.cs
+C:\Users\isabel.bard\Code Projects\DreidelProject\obj\Debug\net7.0\DreidelProject.csproj.CoreCompileInputs.cache
+C:\Users\isabel.bard\Code Projects\DreidelProject\obj\Debug\net7.0\DreidelProject.dll
+C:\Users\isabel.bard\Code Projects\DreidelProject\obj\Debug\net7.0\refint\DreidelProject.dll
+C:\Users\isabel.bard\Code Projects\DreidelProject\obj\Debug\net7.0\DreidelProject.pdb
+C:\Users\isabel.bard\Code Projects\DreidelProject\obj\Debug\net7.0\DreidelProject.genruntimeconfig.cache
+C:\Users\isabel.bard\Code Projects\DreidelProject\obj\Debug\net7.0\ref\DreidelProject.dll

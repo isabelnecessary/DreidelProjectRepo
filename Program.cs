@@ -15,25 +15,30 @@ d) Shin (outside of Israel) means “shtel” or “put in.” */
 
 int numberOfPlayers = 0;
 string[] playerNames = new string[numberOfPlayers]; 
+string[] potentialMaxPlayers = {"Player1, Player2, Player3, Player4"};
 int pot = numberOfPlayers * 5;
+int playerScore = 0;
+Array.Copy(potentialMaxPlayers, playerNames, numberOfPlayers-1); //QUESTION should this be there or elsewhere?
+
 Random random = new Random();
 string[] dreidelSides = {"\u05E0", "\u05D2", "\u05D4", "\u05E9"}; // nun, gimmel, hey, shin
 int dreidelSpinRandom = random.Next(1, 4); // dreidelSides.Count +1);
 string dreidelSpinResult = dreidelSides[dreidelSpinRandom];
-int playerScore = 0; // TODO - how to get everyone's scores? 
 
-//TODO - get number and names of players and store in an array
+
+makePlayer();
 
 void makePlayer()
 {
     Console.WriteLine("enter the number of players (max 4)");
     string ?readResult = Console.ReadLine(); // TODO make this its own method so I can loop it 
-    // TODO *or*, just make this an int?
+
     Int32.TryParse(readResult, out numberOfPlayers);
     bool isValidInteger = Int32.TryParse(readResult, out numberOfPlayers);
+
     if (isValidInteger) 
         {
-            Console.WriteLine($"You are playing dreidel with {numberOfPlayers-1} friends!");
+            Console.WriteLine($"You are playing dreidel with {numberOfPlayers-1} {(numberOfPlayers > 2 ? "friends" : "friend")}!");
         } 
     else
         {
@@ -41,20 +46,25 @@ void makePlayer()
         }
 
     if (numberOfPlayers > 4) Console.WriteLine("Sorry, you need at least 2 and at most 4 players to play dreidel! Enter a new player value");
+    
     //TODO add try again functionality
 
-    //enumerate the players  
+    Console.WriteLine("Here are the players: ");
+    foreach (string player in playerNames) Console.WriteLine(player);
 }
 
 void setPlayerOrder()
 {
     Console.WriteLine("let's do a practice spin to see who goes first!");
-    for (int i = 0; i < numberOfPlayers; i++) 
+    for (int i = 0; i < numberOfPlayers; i++) // each player in playerNames
     {   
-        //TODO add player1 player2 etc and print them next to scores
-        Console.WriteLine(dreidelSpinRandom);
+        Console.WriteLine($"{playerNames[i]}\t{dreidelSpinRandom}");
     }
-    // TODO if two people have the same, keep spinning until a winner
+    
+    //if dreidelSpinRandom == dreidelSpinRandom 
+    {
+
+    }
 
 }
 
@@ -73,8 +83,8 @@ void gameTurn()
                 playerScore += pot;
                 break;
             case "\u05D4":
-                Console.WriteLine("\u05D4"); // hey - get half the pot
-                playerScore = pot % 2 == 0 ? playerScore += pot /2 : playerScore += 1 + pot /2; // if pot is odd, get half+1
+                Console.WriteLine("\u05D4"); // hey - get half the pot, or if pot is odd get half+1
+                playerScore = pot % 2 == 0 ? playerScore += pot /2 : playerScore += 1 + pot /2;
                 break;
             case "\u05E9":
                 Console.WriteLine("\u05E9"); // shin - put one in the pot
