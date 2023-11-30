@@ -19,10 +19,12 @@ bool numberOfPlayersIsValidInteger = false;
 
 int numberOfPlayers = 0;
 string[] playerNames = new string[numberOfPlayers]; 
-string[] potentialMaxPlayers = {"Player1, Player2, Player3, Player4"};
+int[] playerScores = new int[numberOfPlayers];
+string[] potentialMaxPlayers = {"Player1", "Player2", "Player3", "Player4"};
+
+
 int pot = numberOfPlayers * 5;
 int playerScore = 0;
-Array.Copy(potentialMaxPlayers, playerNames, numberOfPlayers); //QUESTION should this be there or elsewhere?
 
 Random random = new Random();
 string[] dreidelSides = {"\u05E0", "\u05D2", "\u05D4", "\u05E9"}; // nun, gimmel, hey, shin
@@ -58,21 +60,26 @@ void makePlayer()
             Console.WriteLine($"You entered {readResult}, please enter a valid number between 1 and 4");
         }
 
-    if (numberOfPlayers > 4) Console.WriteLine("Sorry, you need between 2 and 4 people to play dreidel! Enter a new player value");
-    
-    //TODO add try again functionality
-
-    Console.WriteLine("Here are the players: ");
-    //foreach (string player in playerNames) Console.WriteLine(player);
+    if (numberOfPlayers > 4) 
+        {
+            Console.WriteLine("Sorry, you need between 2 and 4 people to play dreidel! Enter a new player value");
+            howManyPlayers();
+        }
+    else
+        {
+            Array.Copy(potentialMaxPlayers, playerNames, numberOfPlayers-1); 
+            Console.WriteLine("Here are the players: ");
+            foreach (string player in playerNames) Console.WriteLine(player);
+        }
 }
 
-void setPlayerOrder()
+void setPlayerOrder(int numberOfPlayers)
 {
     Console.WriteLine("let's do a practice spin to see who goes first!");
     for (int i = 0; i < numberOfPlayers; i++) // each player in playerNames
     {   
         //TODO need to store everyone's first spins
-        // TODO need to reorganise playerNames based on this!
+        //TODO need to reorganise playerNames based on this!
         Console.WriteLine($"{playerNames[i]}\t{hebrewLetterDreidelSpin}");
     }
     
@@ -83,6 +90,7 @@ void setPlayerOrder()
 
 }
 
+//TODO different players need different scores
 void gameTurn()
 {
     foreach (string player in playerNames) {
