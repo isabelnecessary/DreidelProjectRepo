@@ -66,7 +66,7 @@ void setPlayerOrder(int numberOfPlayers)
     {   
         //TODO need to store everyone's first spins
         //TODO need to reorganise playerNames based on this!
-        Console.WriteLine($"{playerNames[i]}\t{hebrewLetterDreidelSpin}");
+        Console.WriteLine($"{playerNames[i]}\t{dreidelSpin()}");
     }
     
     //if dreidelSpinRandom == dreidelSpinRandom 
@@ -79,14 +79,9 @@ void setPlayerOrder(int numberOfPlayers)
 //TODO different players need different scores
 void gameTurn(string[] playerNames)
 {
-    Random random = new Random();
-    string[] dreidelSides = {"\u05E0", "\u05D2", "\u05D4", "\u05E9"}; // nun, gimmel, hey, shin
-    int integerDreidelSpin = random.Next(1, 4); // dreidelSides.Count +1);
-    string hebrewLetterDreidelSpin = dreidelSides[integerDreidelSpin];
-
     foreach (string player in playerNames) {
     // spin the dreidel
-        switch (hebrewLetterDreidelSpin)
+        switch (dreidelSpin())
         {
             case "\u05E0":
                 Console.WriteLine($"\u05E0 nun"); //nun - use unicode to show hebrew nun
@@ -95,13 +90,13 @@ void gameTurn(string[] playerNames)
             case "\u05D2":
                 Console.WriteLine($"\u05D2 gimmel"); //gimmel - get the whole pot
                 Console.WriteLine("Gantz ('everything') - get the whole pot.");
-                
                 playerScore += pot;
                 break;
             case "\u05D4":
                 Console.WriteLine($"\u05D4 hey"); // hey - get half the pot, or if pot is odd get half+1
-                playerScore = pot % 2 == 0 ? playerScore += pot /2 : playerScore += 1 + pot /2;
                 Console.WriteLine("Halb ('half') - get half the pot.");
+                playerScore = pot % 2 == 0 ? playerScore += pot /2 : playerScore += 1 + pot /2;
+                
                 break;
             case "\u05E9":
                 Console.WriteLine($"\u05E9 shin"); // shin - put one in the pot
@@ -113,4 +108,12 @@ void gameTurn(string[] playerNames)
 
         Console.WriteLine(player, playerScore);
     }
+}
+string dreidelSpin() 
+{
+    Random random = new Random();
+    string[] dreidelSides = {"\u05E0", "\u05D2", "\u05D4", "\u05E9"}; // nun, gimmel, hey, shin
+    int integerDreidelSpin = random.Next(1, 4); // dreidelSides.Count +1);
+    string hebrewLetterDreidelSpin = dreidelSides[integerDreidelSpin];
+    return hebrewLetterDreidelSpin;
 }
