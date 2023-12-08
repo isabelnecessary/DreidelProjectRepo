@@ -46,7 +46,7 @@ int howManyPlayers()
     else
     {   
         Console.WriteLine($"You entered {readResult}, please enter a valid number between 1 and 4");
-        howManyPlayers();
+        return howManyPlayers();
     }  
 
     return numberOfPlayers;
@@ -60,12 +60,16 @@ void makePlayer()
 }
 
 void setPlayerOrder(int numberOfPlayers)
-{
+{   
+    string[] initialSpinResults = new string[playerNames.Length];
+    
     Console.WriteLine("let's do a practice spin to see who goes first!");
     for (int i = 0; i < numberOfPlayers; i++) // each player in playerNames
     {   
+                
         //TODO need to store everyone's first spins
         //TODO need to reorganise playerNames based on this!
+        
         Console.WriteLine($"{playerNames[i]}\t{dreidelSpin()}");
     }
     
@@ -91,12 +95,22 @@ void gameTurn(string[] playerNames)
                 Console.WriteLine($"\u05D2 gimmel"); //gimmel - get the whole pot
                 Console.WriteLine("Gantz ('everything') - get the whole pot.");
                 playerScore += pot;
+                pot = 0;
                 break;
             case "\u05D4":
                 Console.WriteLine($"\u05D4 hey"); // hey - get half the pot, or if pot is odd get half+1
                 Console.WriteLine("Halb ('half') - get half the pot.");
-                playerScore = pot % 2 == 0 ? playerScore += pot /2 : playerScore += 1 + pot /2;
-                
+                if (pot % 2 == 0)
+                {
+                    playerScore += pot /2;
+                    pot /= 2;
+                }
+                else
+                {
+                    playerScore += 1 + pot /2;
+                    pot /= 2;
+                    //TODO Review this and the above for rounding
+                }                
                 break;
             case "\u05E9":
                 Console.WriteLine($"\u05E9 shin"); // shin - put one in the pot
@@ -105,7 +119,6 @@ void gameTurn(string[] playerNames)
                 pot ++;
                 break;
         }
-
         Console.WriteLine(player, playerScore);
     }
 }
@@ -114,6 +127,8 @@ string dreidelSpin()
     Random random = new Random();
     string[] dreidelSides = {"\u05E0", "\u05D2", "\u05D4", "\u05E9"}; // nun, gimmel, hey, shin
     int integerDreidelSpin = random.Next(1, 4); // dreidelSides.Count +1);
+    
     string hebrewLetterDreidelSpin = dreidelSides[integerDreidelSpin];
+    
     return hebrewLetterDreidelSpin;
 }
