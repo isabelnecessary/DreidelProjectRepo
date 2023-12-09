@@ -66,11 +66,11 @@ void setPlayerOrder(int numberOfPlayers)
     Console.WriteLine("let's do a practice spin to see who goes first!");
     for (int i = 0; i < numberOfPlayers; i++) // each player in playerNames
     {   
-                
-        //TODO need to store everyone's first spins
+        initialSpinResults[i] = dreidelSpin();
+
         //TODO need to reorganise playerNames based on this!
         
-        Console.WriteLine($"{playerNames[i]}\t{dreidelSpin()}");
+        Console.WriteLine($"{playerNames[i]}\t{playerScores[i]}");
     }
     
     //if dreidelSpinRandom == dreidelSpinRandom 
