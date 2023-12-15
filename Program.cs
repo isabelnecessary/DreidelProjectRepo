@@ -13,7 +13,6 @@ b) Gimel  means “gantz” or “everything.” The player gets everything in t
 c) Hey means “halb” or “half.” The player gets half of the pot. (If there is an odd number of pieces in the pot, the player takes half of the total plus one).
 d) Shin (outside of Israel) means “shtel” or “put in.” */
 
-string? readResult = "";
 bool numberOfPlayersIsValidInteger = false;
 
 int playerScore = 0;
@@ -38,10 +37,8 @@ int howManyPlayers()
     numberOfPlayersIsValidInteger = int.TryParse(readResult, out int numberOfPlayers);
 
     if (numberOfPlayersIsValidInteger && numberOfPlayers > 0 && numberOfPlayers <= 4 ) 
-    {
-        
-        Console.WriteLine($"You are playing dreidel with {numberOfPlayers-1} {(numberOfPlayers > 2 || numberOfPlayers == 0 ? "friends" : "friend")}!");
-        //TODO if there's 0 other players   
+    {       
+        Console.WriteLine($"You are playing dreidel with {numberOfPlayers-1} {(numberOfPlayers > 2 || numberOfPlayers == 1 ? "friends" : "friend")}!");
     } 
     else
     {   
