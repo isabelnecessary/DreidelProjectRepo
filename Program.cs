@@ -112,13 +112,24 @@ void gameTurn(string[] playerNames)
             case "\u05E9":
                 Console.WriteLine($"\u05E9 shin"); // shin - put one in the pot
                 Console.WriteLine("Shtel ('put') - put one of your tokens in the pot.");
-                playerScore --;
+                try {playerScore --;}                
+                //Handle case where 0 players are left
+                catch
+                {
+                    ArgumentNullException ex;
+                    Console.WriteLine("You have no tokens to put back! You are out of the game.");
+                    numberOfPlayers--;                   
+                    int indexToRemove = Array.IndexOf(playerNames, player);
+                    playerNames = playerNames.Where((source, index) => index != indexToRemove).ToArray();
+                }
+                //TODO - Only want pot to increment where player DOES have tokens left
                 pot ++;
                 break;
         }
         Console.WriteLine(player, playerScore);
     }
 }
+
 string dreidelSpin() 
 {
     Random random = new Random();
