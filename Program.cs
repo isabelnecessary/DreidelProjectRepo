@@ -78,7 +78,7 @@ void setPlayerOrder(int numberOfPlayers)
 //TODO different players need different scores
 void gameTurn(string[] playerNames, int[] playerScores)
 {
-    for (int i = 0; i > playerNames.Length; i++) {
+    for (int i = 0; i < numberOfPlayers; i++) {
     // spin the dreidel
         switch (dreidelSpin())
         {
@@ -109,18 +109,30 @@ void gameTurn(string[] playerNames, int[] playerScores)
             case "\u05E9":
                 Console.WriteLine($"\u05E9 shin"); // shin - put one in the pot
                 Console.WriteLine("Shtel ('put') - put one of your tokens in the pot.");
-                try {playerScores[i] --;}                               
-                catch
+                if (playerScores[i] > 0)
                 {
-                    //Handle case where 0 players are left
-                    ArgumentNullException ex;
+                    try {playerScores[i] --;}                              
+                    catch
+                    {
+                        //TODO problem, is handling "0 players left" (???) but in wrong place
+                        //This handles the case where 0 players are left
+                        ArgumentNullException ex;
+                        Console.WriteLine("You have no tokens to put back! You are out of the game.");
+                        numberOfPlayers--;                   
+                        int indexToRemove = i; //Array.IndexOf(playerNames, playerNames[i]);
+                        playerNames = playerNames.Where((source, index) => index != indexToRemove).ToArray();
+                    }   
+                    pot ++;
+                }
+                else 
+                {
                     Console.WriteLine("You have no tokens to put back! You are out of the game.");
                     numberOfPlayers--;                   
                     int indexToRemove = i; //Array.IndexOf(playerNames, playerNames[i]);
                     playerNames = playerNames.Where((source, index) => index != indexToRemove).ToArray();
+                    Console.WriteLine("Here are the current players:");
+                    foreach (string player in playerNames) Console.WriteLine(player);
                 }
-                //TODO - Only want pot to increment where player DOES have tokens left
-                pot ++;
                 break;
         }
         Console.WriteLine(playerNames[i], playerScores[i]);
