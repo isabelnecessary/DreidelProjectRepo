@@ -51,9 +51,9 @@ int howManyPlayers()
 
 void makePlayer()
 {
-    //Array.Copy(potentialMaxPlayers, playerNames, numberOfPlayers-1); 
+    Array.Copy(potentialMaxPlayers, playerNames, numberOfPlayers); 
     Console.WriteLine("Here are the players: ");
-    foreach (string player in potentialMaxPlayers.Take(numberOfPlayers)) Console.WriteLine(player);
+    foreach (string player in playerNames /*potentialMaxPlayers.Take(numberOfPlayers)*/ ) Console.WriteLine(player);
 }
 
 void setPlayerOrder(int numberOfPlayers)
@@ -106,16 +106,15 @@ void gameTurn(string[] playerNames)
                 {
                     playerScore += 1 + pot /2;
                     pot /= 2;
-                    //TODO Review this and the above for rounding
                 }                
                 break;
             case "\u05E9":
                 Console.WriteLine($"\u05E9 shin"); // shin - put one in the pot
                 Console.WriteLine("Shtel ('put') - put one of your tokens in the pot.");
-                try {playerScore --;}                
-                //Handle case where 0 players are left
+                try {playerScore --;}                               
                 catch
                 {
+                    //Handle case where 0 players are left
                     ArgumentNullException ex;
                     Console.WriteLine("You have no tokens to put back! You are out of the game.");
                     numberOfPlayers--;                   
