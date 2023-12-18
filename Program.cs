@@ -15,8 +15,6 @@ d) Shin (outside of Israel) means “shtel” or “put in.” */
 
 bool numberOfPlayersIsValidInteger = false;
 
-int playerScore = 0;
-
 string[] potentialMaxPlayers = {"Player1", "Player2", "Player3", "Player4"};
 string[] playerNames = new string[potentialMaxPlayers.Length]; 
 int[] playerScores = new int[potentialMaxPlayers.Length];
@@ -26,7 +24,7 @@ int pot = numberOfPlayers * 5;
 
 makePlayer();
 // setPlayerOrder();
-gameTurn(playerNames);
+gameTurn(playerNames, playerScores);
 
 
 int howManyPlayers()
@@ -78,9 +76,9 @@ void setPlayerOrder(int numberOfPlayers)
 }
 
 //TODO different players need different scores
-void gameTurn(string[] playerNames)
+void gameTurn(string[] playerNames, int[] playerScores)
 {
-    foreach (string player in playerNames) {
+    for (int i = 0; i > playerNames.Length; i++) {
     // spin the dreidel
         switch (dreidelSpin())
         {
@@ -91,7 +89,7 @@ void gameTurn(string[] playerNames)
             case "\u05D2":
                 Console.WriteLine($"\u05D2 gimmel"); //gimmel - get the whole pot
                 Console.WriteLine("Gantz ('everything') - get the whole pot.");
-                playerScore += pot;
+                playerScores[i] += pot;
                 pot = 0;
                 break;
             case "\u05D4":
@@ -99,33 +97,33 @@ void gameTurn(string[] playerNames)
                 Console.WriteLine("Halb ('half') - get half the pot.");
                 if (pot % 2 == 0)
                 {
-                    playerScore += pot /2;
+                    playerScores[i] += pot /2;
                     pot /= 2;
                 }
                 else
                 {
-                    playerScore += 1 + pot /2;
+                    playerScores[i] += 1 + pot /2;
                     pot /= 2;
                 }                
                 break;
             case "\u05E9":
                 Console.WriteLine($"\u05E9 shin"); // shin - put one in the pot
                 Console.WriteLine("Shtel ('put') - put one of your tokens in the pot.");
-                try {playerScore --;}                               
+                try {playerScores[i] --;}                               
                 catch
                 {
                     //Handle case where 0 players are left
                     ArgumentNullException ex;
                     Console.WriteLine("You have no tokens to put back! You are out of the game.");
                     numberOfPlayers--;                   
-                    int indexToRemove = Array.IndexOf(playerNames, player);
+                    int indexToRemove = i; //Array.IndexOf(playerNames, playerNames[i]);
                     playerNames = playerNames.Where((source, index) => index != indexToRemove).ToArray();
                 }
                 //TODO - Only want pot to increment where player DOES have tokens left
                 pot ++;
                 break;
         }
-        Console.WriteLine(player, playerScore);
+        Console.WriteLine(playerNames[i], playerScores[i]);
     }
 }
 
