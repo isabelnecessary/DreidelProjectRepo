@@ -59,17 +59,28 @@ void SetPlayerOrder(int numberOfPlayers)
         Console.WriteLine($"{playerNames[i]}\t{playerScores[i]}");
     }
     
-    if (!(initialSpinResults.Count(c => c == "\u05E0") > 1)) 
+    if (initialSpinResults.Count(x => x == "\u05E9") == playerNames.Length-1) // if every player rolled a shin, roll again
     {
-        //TODO then player who rolls nun should be moved to the start of the array 
+        Console.WriteLine("Everyone rolled the lowest, a \u05E9 shin! Let's try again.");
+        Thread.Sleep(500);
+        SetPlayerOrder(numberOfPlayers);
+    }
+
+    else if (initialSpinResults.Count(x => x == "\u05D2") == 1) // if one player rolled a gimmel
+    {
+        // TODO this player should go first
         // https://stackoverflow.com/a/25794168
     }
 
-    else
+    else if (initialSpinResults.Count(x => x == "\u05D4") == 1) // if one player rolled a hey
     {
-        Console.WriteLine("Two players both rolled a nun! Let's try again.");
-        Thread.Sleep(500);
-        SetPlayerOrder(numberOfPlayers);
+        //TODO then player who rolls gimmel should be moved to the start of the array 
+        
+    }
+
+    else // by default, this means playerNames.Length - 1 people rolled a shin and one person rolled a nun
+    {
+        // the player who rolled a nun should go first 
     }
 }
 
