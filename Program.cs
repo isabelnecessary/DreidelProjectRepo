@@ -1,18 +1,4 @@
-﻿//TEST COMMIT
-
-/* Business Rules
-
-Everyone spins and the highest spin goes first
-    if two people have the same, keep spinning until a winner
-
-a) Nun means “nisht” or “nothing.” The player does nothing.
-b) Gimel  means “gantz” or “everything.” The player gets everything in the pot.
-c) Hey means “halb” or “half.” The player gets half of the pot. (If there is an odd number of pieces in the pot, the player takes half of the total plus one).
-d) Shin (outside of Israel) means “shtel” or “put in.” 
-
-when a player runs out of tokens, they are out
-when one player has all the tokens, they have won
-*/
+﻿using System.Linq;
 
 bool numberOfPlayersIsValidInteger = false;
 
@@ -59,28 +45,34 @@ void MakePlayer()
     foreach (string player in playerNames) Console.WriteLine(player);
 }
 
+
 void SetPlayerOrder(int numberOfPlayers)
 {   
     string[] initialSpinResults = new string[playerNames.Length];
     
     Console.WriteLine("let's do a practice spin to see who goes first!");
+
     for (int i = 0; i < numberOfPlayers; i++)
     {   
         initialSpinResults[i] = DreidelSpin();
-
-        //TODO need to reorganise playerNames based on this!
-        
+       
         Console.WriteLine($"{playerNames[i]}\t{playerScores[i]}");
     }
     
-    //if dreidelSpinRandom == dreidelSpinRandom 
+    if (!(initialSpinResults.Count(c => c == "\u05E0") > 1)) 
     {
-
+        //TODO then player who rolls nun should be moved to the start of the array 
+        // https://stackoverflow.com/a/25794168
     }
 
+    else
+    {
+        Console.WriteLine("Two players both rolled a nun! Let's try again.");
+        Thread.Sleep(500);
+        SetPlayerOrder(numberOfPlayers);
+    }
 }
 
-//TODO different players need different scores
 void GameTurn(string[] playerNames, int[] playerScores)
 {
     Console.WriteLine("\nNew round!");
