@@ -12,3 +12,4 @@ C:\Users\isabel.bard\Code Projects\DreidelProject\obj\Debug\net7.0\refint\Dreide
 C:\Users\isabel.bard\Code Projects\DreidelProject\obj\Debug\net7.0\DreidelProject.pdb
 C:\Users\isabel.bard\Code Projects\DreidelProject\obj\Debug\net7.0\DreidelProject.genruntimeconfig.cache
 C:\Users\isabel.bard\Code Projects\DreidelProject\obj\Debug\net7.0\ref\DreidelProject.dll
+C:\Users\isabel.bard\Code Projects\DreidelProject\obj\Debug\net7.0\DreidelProject.sourcelink.json

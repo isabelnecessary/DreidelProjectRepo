@@ -10,7 +10,7 @@ int numberOfPlayers = HowManyPlayers();
 int pot = numberOfPlayers * 5;
 
 MakePlayer();
-// setPlayerOrder();
+SetPlayerOrder(numberOfPlayers);
 do {
     GameTurn(playerNames, playerScores);
 } while (numberOfPlayers > 1);
@@ -41,8 +41,12 @@ int HowManyPlayers()
 void MakePlayer()
 {
     Array.Copy(potentialMaxPlayers, playerNames, numberOfPlayers); 
+
     Console.WriteLine("Here are the players: ");
-    foreach (string player in playerNames) Console.WriteLine(player);
+    for (int i = 0; i < numberOfPlayers; i++) {
+        playerScores[i] = 5;
+        Console.WriteLine($"{playerNames[i]} \t\t {playerScores[i]} tokens");
+    }
 }
 
 
@@ -50,16 +54,16 @@ void SetPlayerOrder(int numberOfPlayers)
 {   
     string[] initialSpinResults = new string[playerNames.Length];
     
-    Console.WriteLine("let's do a practice spin to see who goes first!");
+    Console.WriteLine("\nLet's do a practice spin to see who goes first!");
 
     for (int i = 0; i < numberOfPlayers; i++)
     {   
         initialSpinResults[i] = DreidelSpin();
        
-        Console.WriteLine($"{playerNames[i]}\t{playerScores[i]}");
+        Console.WriteLine($"{playerNames[i]}\t\t{initialSpinResults[i]}");
     }
     
-    if (initialSpinResults.Count(x => x == "\u05E9") == playerNames.Length-1) // if every player rolled a shin, roll again
+    if (initialSpinResults.Count(x => x == "\u05E9") == playerNames.Length) // if every player rolled a shin, roll again
     {
         Console.WriteLine("Everyone rolled the lowest, a \u05E9 shin! Let's try again.");
         Thread.Sleep(500);
@@ -68,8 +72,20 @@ void SetPlayerOrder(int numberOfPlayers)
 
     else if (initialSpinResults.Count(x => x == "\u05D2") == 1) // if one player rolled a gimmel
     {
-        // TODO this player should go first
+        int indexOfGimmel = Array.IndexOf(initialSpinResults, "\u05D2");
+
         // https://stackoverflow.com/a/25794168
+        //https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.where?view=net-8.0 
+        playerNames = playerNames.Where(
+            (playerNames, index) => index != indexOfGimmel).ToArray();
+        // Array.Copy(newPlayerNames, playerNames, playerNames.Length);
+
+        // TODO this player should go first
+        
+
+
+        //An Alternative Approach
+        Reorderer(playerNames, indexOfGimmel, 0);
     }
 
     else if (initialSpinResults.Count(x => x == "\u05D4") == 1) // if one player rolled a hey
@@ -142,6 +158,8 @@ void GameTurn(string[] playerNames, int[] playerScores)
                     playerScores = playerScores.Where((source, index) => index != indexToRemove).ToArray();
                     Console.WriteLine("Here are the current players:");
                     foreach (string player in playerNames) Console.WriteLine(player);
+
+                    //TODO when I have 2 players and remove Player2, she's momentarily replaced by Player3 in this "Here are the current players" but then not anywhere else
                 }
                 break;
         }
@@ -158,8 +176,38 @@ string DreidelSpin()
     Random random = new Random();
     string[] dreidelSides = {"\u05E0", "\u05D2", "\u05D4", "\u05E9"}; // nun, gimmel, hey, shin
     
-    int integerDreidelSpin = random.Next(1, 4); // dreidelSides.Count +1);
+    int integerDreidelSpin = random.Next(0, dreidelSides.Length); // dreidelSides.Count +1);
     string hebrewLetterDreidelSpin = dreidelSides[integerDreidelSpin];
     
     return hebrewLetterDreidelSpin;
 }
+
+void Reorderer(string[] playerNames, int oldIndex, int newIndex)
+{
+    //https://stackoverflow.com/questions/7242909/moving-elements-in-array-c-sharp
+    
+    if (oldIndex == newIndex)
+    {
+        return;
+    }
+
+    string tmp = playerNames[oldIndex];
+
+    if (newIndex < oldIndex) 
+    {
+        // Need to move part of the array "up" to make room
+        Array.Copy(playerNames, newIndex, playerNames, newIndex + 1, oldIndex - newIndex);
+    }
+    else
+    {
+        // Need to move part of the array "down" to fill the gap
+        Array.Copy(playerNames, oldIndex + 1, playerNames, oldIndex, newIndex - oldIndex);
+    }
+
+    playerNames[newIndex] = tmp;
+
+    Console.WriteLine($"{playerNames[oldIndex]} is at position {newIndex} ");
+}
+
+
+

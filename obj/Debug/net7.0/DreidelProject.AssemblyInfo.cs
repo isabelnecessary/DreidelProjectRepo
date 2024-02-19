@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DreidelProject")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bcc2fbc8cad8115f1589a4a9b2bd3f90c4501f2c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+50e95cf8b140ae09e1b10c09f24b9af8032f095a")]
 [assembly: System.Reflection.AssemblyProductAttribute("DreidelProject")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DreidelProject")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
