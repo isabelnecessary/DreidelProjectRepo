@@ -45,7 +45,7 @@ void MakePlayer()
     Console.WriteLine("Here are the players: ");
     for (int i = 0; i < numberOfPlayers; i++) {
         playerScores[i] = 5;
-        Console.WriteLine($"{playerNames[i]} \t\t {playerScores[i]} tokens");
+        Console.WriteLine($"{playerNames[i]} \t {playerScores[i]} tokens");
     }
 }
 
@@ -76,13 +76,9 @@ void SetPlayerOrder(int numberOfPlayers)
 
         // https://stackoverflow.com/a/25794168
         //https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.where?view=net-8.0 
-        playerNames = playerNames.Where(
-            (playerNames, index) => index != indexOfGimmel).ToArray();
-        // Array.Copy(newPlayerNames, playerNames, playerNames.Length);
-
-        // TODO this player should go first
-        
-
+        // playerNames = playerNames.Where(
+        //    (playerNames, index) => index != indexOfGimmel).ToArray();
+        // Array.Copy(newPlayerNames, playerNames, playerNames.Length);       
 
         //An Alternative Approach
         Reorderer(playerNames, indexOfGimmel, 0);
@@ -90,19 +86,25 @@ void SetPlayerOrder(int numberOfPlayers)
 
     else if (initialSpinResults.Count(x => x == "\u05D4") == 1) // if one player rolled a hey
     {
+        int indexOfHey = Array.IndexOf(initialSpinResults, "\u05D4");
         //TODO then player who rolls gimmel should be moved to the start of the array 
+            //An Alternative Approach
+        Reorderer(playerNames, indexOfHey, 0);
         
     }
 
     else // by default, this means playerNames.Length - 1 people rolled a shin and one person rolled a nun
     {
-        // the player who rolled a nun should go first 
+        int indexOfNun = Array.IndexOf(initialSpinResults, "\u05E0");
+        //TODO then player who rolls nun  should be moved to the start of the array 
+            //An Alternative Approach
+        Reorderer(playerNames, indexOfNun, 0);
     }
 }
 
 void GameTurn(string[] playerNames, int[] playerScores)
 {
-    Console.WriteLine("\nNew round!");
+    Console.WriteLine($"\nNew round! \nThe pot currently contains {pot} tokens.");
     for (int i = 0; i < numberOfPlayers; i++) {
     // spin the dreidel
         switch (DreidelSpin())

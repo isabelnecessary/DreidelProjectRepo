@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "P//x4p0om0LK7zaMZTENYx4OJqExD2cTlcA+Be3/13S/mkRliapR8ll0cRw/NMlPna7pHs85MlAPUUnStFqlbg==",
+  "dgSpecHash": "DfpQywhF37/vpDBPwq3YN0SGQCkwmc2613S4VjjxYXVF7RihrPsNwrwoVAx7yur5NPfqXK8SWFm70FcHwR66vg==",
   "success": true,
   "projectFilePath": "C:\\Users\\isabel.bard\\Code Projects\\DreidelProject\\DreidelProject.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\isabel.admin\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.16\\microsoft.netcore.app.ref.7.0.16.nupkg.sha512",
+    "C:\\Users\\isabel.admin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.16\\microsoft.windowsdesktop.app.ref.7.0.16.nupkg.sha512",
+    "C:\\Users\\isabel.admin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.16\\microsoft.aspnetcore.app.ref.7.0.16.nupkg.sha512",
+    "C:\\Users\\isabel.admin\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.16\\microsoft.netcore.app.host.win-x64.7.0.16.nupkg.sha512"
+  ],
   "logs": []
 }
